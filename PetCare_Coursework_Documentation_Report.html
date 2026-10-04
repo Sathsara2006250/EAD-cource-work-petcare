@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PetCare Enterprise Coursework Report</title>
+<style>
+    @page {
+        size: A4;
+        margin: 20mm 15mm 20mm 15mm;
+    }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        line-height: 1.6;
+        color: #1e293b;
+        background-color: #f8fafc;
+        margin: 0;
+        padding: 20px;
+    }
+    .document-container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #ffffff;
+        padding: 50px 60px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border-radius: 8px;
+    }
+    @media print {
+        body {
+            background-color: #ffffff;
+            padding: 0;
+        }
+        .document-container {
+            box-shadow: none;
+            padding: 0;
+            max-width: 100%;
+        }
+        .page-break {
+            page-break-before: always;
+        }
+        .no-print {
+            display: none;
+        }
+    }
+    
+    /* Cover Page */
+    .cover-page {
+        text-align: center;
+        padding: 100px 20px 80px 20px;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    .cover-title {
+        font-size: 26pt;
+        font-weight: 800;
+        color: #0f766e;
+        margin-bottom: 10px;
+        line-height: 1.2;
+    }
+    .cover-subtitle {
+        font-size: 15pt;
+        color: #475569;
+        margin-bottom: 40px;
+    }
+    .cover-badge {
+        display: inline-block;
+        background-color: #0d9488;
+        color: white;
+        padding: 6px 18px;
+        font-size: 11pt;
+        font-weight: 600;
+        border-radius: 20px;
+        margin-bottom: 50px;
+    }
+    .cover-meta {
+        margin: 40px auto;
+        max-width: 500px;
+        text-align: left;
+        background: #f0fdfa;
+        border: 1px solid #99f6e4;
+        border-radius: 8px;
+        padding: 20px 30px;
+        font-size: 10.5pt;
+    }
+    .cover-meta td {
+        padding: 6px 10px;
+    }
+    .cover-meta td.label {
+        font-weight: bold;
+        color: #0f766e;
+        width: 40%;
+    }
+
+    /* Headings */
+    h1 {
+        font-size: 18pt;
+        color: #0f766e;
+        border-bottom: 2px solid #0d9488;
+        padding-bottom: 6px;
+        margin-top: 36px;
+        margin-bottom: 16px;
+    }
+    h2 {
+        font-size: 14pt;
+        color: #1e293b;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        border-left: 4px solid #0d9488;
+        padding-left: 10px;
+    }
+    h3 {
+        font-size: 11.5pt;
+        color: #334155;
+        margin-top: 18px;
+        margin-bottom: 8px;
+    }
+    p, li {
+        font-size: 10pt;
+        color: #334155;
+        text-align: justify;
+    }
+    ul, ol {
+        margin-top: 6px;
+        margin-bottom: 12px;
+        padding-left: 24px;
+    }
+
+    /* Tables */
+    table.data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 9pt;
+    }
+    table.data-table th, table.data-table td {
+        border: 1px solid #cbd5e1;
+        padding: 8px 10px;
+        text-align: left;
+    }
+    table.data-table th {
+        background-color: #0f766e;
+        color: #ffffff;
+        font-weight: 600;
+    }
+    table.data-table tr:nth-child(even) {
+        background-color: #f8fafc;
+    }
+
+    /* Code Blocks */
+    pre {
+        background: #0f172a;
+        color: #f8fafc;
+        padding: 12px 16px;
+        border-radius: 6px;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 8.5pt;
+        overflow-x: auto;
+        line-height: 1.4;
+        margin: 12px 0;
+    }
+    code {
+        font-family: 'Consolas', 'Courier New', monospace;
+        background-color: #e2e8f0;
+        color: #0f766e;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-size: 9pt;
+    }
+    pre code {
+        background-color: transparent;
+        color: inherit;
+        padding: 0;
+    }
+
+    /* Callout & Quotes */
+    .callout {
+        background-color: #f0fdfa;
+        border-left: 4px solid #0d9488;
+        padding: 12px 18px;
+        margin: 16px 0;
+        border-radius: 0 6px 6px 0;
+    }
+    .qa-box {
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 14px 18px;
+        margin-bottom: 14px;
+    }
+    .qa-question {
+        font-weight: bold;
+        color: #0f766e;
+        font-size: 10.5pt;
+        margin-bottom: 6px;
+    }
+    .qa-answer {
+        font-size: 9.5pt;
+        color: #334155;
+    }
+    .print-btn-bar {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: white;
+        padding: 10px 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 1000;
+    }
+    .print-btn {
+        background: #0d9488;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .print-btn:hover {
+        background: #0f766e;
+    }
+</style>
+</head>
+<body>
+
+<div class="print-btn-bar no-print">
+    <button class="print-btn" onclick="window.print()">Print / Save as PDF (Ctrl + P)</button>
+</div>
+
+<div class="document-container">
+
+    <!-- COVER PAGE -->
+    <div class="cover-page">
+        <div class="cover-badge">ENTERPRISE APPLICATION DEVELOPMENT (EAD)</div>
+        <div class="cover-title">PET CARE & VETERINARY SERVICES<br>CLINICAL MANAGEMENT SYSTEM</div>
+        <div class="cover-subtitle">Desktop Enterprise Application & Technical Coursework Report</div>
+        
+        <table class="cover-meta">
+            <tr><td class="label">Coursework:</td><td>Enterprise Application Development</td></tr>
+            <tr><td class="label">Domain:</td><td>Pet Care & Veterinary Services</td></tr>
+            <tr><td class="label">Technology Stack:</td><td>Java 21, Swing, MySQL, JasperReports</td></tr>
+            <tr><td class="label">Architecture:</td><td>Layered Architecture / MVC & DAO Patterns</td></tr>
+            <tr><td class="label">Academic Year:</td><td>2025 / 2026</td></tr>
+        </table>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- EXECUTIVE SUMMARY & TOC -->
+    <h1>EXECUTIVE SUMMARY</h1>
+    <p>The <strong>Pet Care & Veterinary Services Clinical Management System</strong> is a production-ready enterprise desktop application developed in Java Swing, backed by a relational MySQL database. The system automates clinical processes for modern veterinary clinics, eliminating scheduling collisions, unifying fragmented patient and pet records, dynamically calculating medical treatment costs, and compiling clinical audit reports using JasperReports.</p>
+    <p>Adhering strictly to enterprise software engineering standards, the system implements:</p>
+    <ul>
+        <li><strong>Layered Model-View-Controller (MVC) Architecture:</strong> Clean separation between user interface, business services, and database persistence layers.</li>
+        <li><strong>Gang of Four (GoF) Design Patterns:</strong> The <em>Singleton Pattern</em> for safe database connection pooling and the <em>Data Access Object (DAO) Pattern</em> for clean modular data persistence.</li>
+        <li><strong>Role-Based Access Control (RBAC):</strong> Tailored navigation and authorization for <em>Managers</em> (full clinical, financial, and reporting access) and <em>Customers</em> (pet registration and appointment booking).</li>
+        <li><strong>Two Complex Multi-Step Transactions:</strong> Cascading appointment booking with doctor schedule conflict detection, and clinical treatment diagnosis with real-time billing calculations.</li>
+        <li><strong>Comprehensive Validation & Custom Exceptions:</strong> Strict regex data validation and custom domain exceptions (<code>InvalidAppointmentException</code>).</li>
+        <li><strong>JasperReports Multi-Table Audit Engine:</strong> Advanced SQL JOIN querying four relational tables (<code>appointments</code>, <code>customers</code>, <code>pets</code>, <code>treatments</code>) with interactive viewing and PDF/CSV export.</li>
+    </ul>
+
+    <h1>TABLE OF CONTENTS</h1>
+    <ol>
+        <li><strong>Chapter 1:</strong> Introduction & Domain Analysis</li>
+        <li><strong>Chapter 2:</strong> System Requirements & User Roles</li>
+        <li><strong>Chapter 3:</strong> System Architecture & Software Design Patterns</li>
+        <li><strong>Chapter 4:</strong> Relational Database Design & Schema</li>
+        <li><strong>Chapter 5:</strong> User Interface Implementation & Transactions</li>
+        <li><strong>Chapter 6:</strong> JasperReports Enterprise Reporting</li>
+        <li><strong>Chapter 7:</strong> Input Validation & System Security</li>
+        <li><strong>Chapter 8:</strong> Build Automation, Packaging & Deployment</li>
+        <li><strong>Chapter 9:</strong> Software Verification & Test Cases</li>
+        <li><strong>Chapter 10:</strong> Conclusion & Viva Voce Preparation Guide</li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 1 -->
+    <h1>CHAPTER 1: INTRODUCTION & DOMAIN ANALYSIS</h1>
+    <h2>1.1 Domain Background</h2>
+    <p>Veterinary practice management requires coordinating multiple interconnected entities: pet owners, animal patients of diverse species, medical specialists, appointment schedules, surgical procedures, and itemized billing. Unlike traditional human clinics where the patient is the customer, veterinary healthcare operates on a guardian-dependent model where owner contact profiles, animal medical histories, and clinical treatments must be linked relationally.</p>
+
+    <h2>1.2 Problem Statement</h2>
+    <p>Manual and spreadsheet-based clinic tracking introduces severe operational inefficiencies:</p>
+    <ul>
+        <li><strong>Doctor Double Bookings:</strong> Simultaneous appointments scheduled for the same doctor at the same time slot, leading to long clinic wait times.</li>
+        <li><strong>Fragmented Medical Records:</strong> Lack of historical linkage between customer contact updates, animal vaccination records, and historical clinical diagnoses.</li>
+        <li><strong>Inaccurate Billing:</strong> Manual addition of medication charges and procedure costs resulting in invoice errors and financial discrepancies.</li>
+        <li><strong>Lack of Real-time Audit Visibility:</strong> Clinic managers struggle to generate instant revenue reports filtered by pet species, payment statuses, or specific treatment dates.</li>
+    </ul>
+
+    <h2>1.3 Project Aims & Objectives</h2>
+    <p>The objective of this project is to develop an enterprise-grade desktop software system fulfilling all coursework criteria:</p>
+    <ul>
+        <li>Develop a modern Java Swing GUI using FlatLaf styling for clean user experience.</li>
+        <li>Enforce Role-Based Access Control separating administrative from client workflows.</li>
+        <li>Provide normalized MySQL data persistence using the DAO and Singleton design patterns.</li>
+        <li>Implement two transaction workflows with business logic validation.</li>
+        <li>Integrate JasperReports for comprehensive multi-table join reporting.</li>
+        <li>Deliver automated scripts to build executable JAR and native Windows EXE distribution packages.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 2 -->
+    <h1>CHAPTER 2: SYSTEM REQUIREMENTS & USER ROLES</h1>
+    <h2>2.1 Functional Requirements</h2>
+    <ul>
+        <li><strong>FR-01 (Authentication):</strong> Secure login verification routing users to Manager or Customer dashboards based on role.</li>
+        <li><strong>FR-02 (Pet Owner Management):</strong> Full CRUD operations for customer profiles with email and phone validation.</li>
+        <li><strong>FR-03 (Patient Pet Management):</strong> Complete CRUD profiling for animal patients (species, breed, age, weight, notes) linked to verified owners.</li>
+        <li><strong>FR-04 (Transaction 1 - Appointment Scheduling):</strong> Unique code generation, cascading owner-to-pet filtering, and doctor collision detection.</li>
+        <li><strong>FR-05 (Transaction 2 - Treatment & Billing):</strong> Clinical record entry, live medication and procedure cost addition, and automated invoice completion.</li>
+        <li><strong>FR-06 (Search & Filter):</strong> Instant search filtering across customers, pets, appointments, and billing tables.</li>
+        <li><strong>FR-07 (Dashboard Analytics):</strong> Real-time KPI summaries of total clients, pets, daily visits, treatments, and gross revenue.</li>
+        <li><strong>FR-08 (JasperReports Reporting):</strong> Multi-table SQL join generating printable audit reports with PDF/CSV export.</li>
+    </ul>
+
+    <h2>2.2 Role-Based Access Control (RBAC) Matrix</h2>
+    <table class="data-table">
+        <thead>
+            <tr><th>Module / Feature</th><th>Manager Role</th><th>Customer Role</th><th>Operational Description</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Authentication</strong></td><td>Full Access</td><td>Full Access</td><td>Role-based credential verification</td></tr>
+            <tr><td><strong>Clinic Dashboard</strong></td><td>Full Access</td><td>Restricted</td><td>KPI counters and appointment schedule overview</td></tr>
+            <tr><td><strong>Pet Owner Profiles</strong></td><td>Full CRUD</td><td>Restricted</td><td>Client personal contacts and addresses</td></tr>
+            <tr><td><strong>Patient Pet Directory</strong></td><td>Full CRUD</td><td>View/Add Own</td><td>Animal profiles, breed, weight, medical notes</td></tr>
+            <tr><td><strong>Appointment Booking (Tx 1)</strong></td><td>Full Management</td><td>Book Own Pets</td><td>Scheduling veterinary visits with conflict check</td></tr>
+            <tr><td><strong>Treatment & Billing (Tx 2)</strong></td><td>Full CRUD</td><td>View Invoices</td><td>Clinical diagnoses and dynamic billing calculations</td></tr>
+            <tr><td><strong>JasperReports Audit Engine</strong></td><td>Full Access</td><td>Restricted</td><td>4-Table join audit reports with PDF/CSV export</td></tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 3 -->
+    <h1>CHAPTER 3: SYSTEM ARCHITECTURE & SOFTWARE DESIGN PATTERNS</h1>
+    <h2>3.1 Layered MVC Architecture</h2>
+    <p>The application is partitioned into four distinct architectural tiers to ensure maintainability, testability, and separation of concerns:</p>
+    <div class="callout">
+        <strong>1. Presentation Tier (<code>com.petcare.view</code>):</strong> Java Swing user interfaces and event handling.<br>
+        <strong>2. Business Logic Tier (<code>com.petcare.service</code>):</strong> Business rule validation, calculations, and exception handling.<br>
+        <strong>3. Data Access Tier (<code>com.petcare.dao</code>):</strong> Parametrized JDBC SQL execution and object mapping.<br>
+        <strong>4. Domain Model Tier (<code>com.petcare.model</code>):</strong> POJO entity classes representing business objects.
+    </div>
+
+    <h2>3.2 Singleton Design Pattern</h2>
+    <p>Database connectivity is managed through a thread-safe Singleton class (<code>DatabaseConnection.java</code>) to avoid connection exhaustion and ensure connection reuse:</p>
+    <pre><code>public class DatabaseConnection {
+    private static DatabaseConnection instance;
+    private Connection connection;
+
+    private DatabaseConnection() throws DatabaseException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (Exception e) {
+            throw new DatabaseException("Failed to establish database connection.", e);
+        }
+    }
+
+    public static synchronized DatabaseConnection getInstance() throws DatabaseException {
+        if (instance == null || instance.getConnection().isClosed()) {
+            instance = new DatabaseConnection();
+        }
+        return instance;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+}</code></pre>
+
+    <h2>3.3 Custom Exception Handling</h2>
+    <p>The project defines domain-specific checked exceptions rather than generic runtime errors:</p>
+    <ul>
+        <li><code>InvalidAppointmentException</code>: Raised when appointment business rules are broken (past date selection, doctor schedule conflict).</li>
+        <li><code>ValidationException</code>: Raised during form input verification (invalid emails, malformed phone numbers, negative numbers).</li>
+        <li><code>DatabaseException</code>: Encapsulates SQL and JDBC connection errors into safe user-facing diagnostic messages.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 4 -->
+    <h1>CHAPTER 4: RELATIONAL DATABASE DESIGN & SCHEMA</h1>
+    <h2>4.1 Database Normalization (3NF)</h2>
+    <p>The database schema is fully normalized up to the <strong>Third Normal Form (3NF)</strong>:</p>
+    <ul>
+        <li><strong>1NF:</strong> All columns store atomic values, each table possesses a primary key, and repeating groups are eliminated.</li>
+        <li><strong>2NF:</strong> All non-key attributes depend fully on the primary key, eliminating partial functional dependencies.</li>
+        <li><strong>3NF:</strong> Transitive dependencies are removed. For instance, customer contact details are stored strictly in <code>customers</code> rather than duplicated in <code>appointments</code>.</li>
+    </ul>
+
+    <h2>4.2 Relational Data Dictionary</h2>
+    <table class="data-table">
+        <thead>
+            <tr><th>Table</th><th>Column</th><th>Data Type</th><th>Key / Constraint</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+            <tr><td rowspan="3"><strong>users</strong></td><td>id</td><td>INT</td><td>PK, AUTO_INCREMENT</td><td>Unique user identifier</td></tr>
+            <tr><td>username</td><td>VARCHAR(50)</td><td>UNIQUE, NOT NULL</td><td>Login username</td></tr>
+            <tr><td>role</td><td>ENUM</td><td>'Manager', 'Customer'</td><td>Role-based access level</td></tr>
+            <tr><td rowspan="3"><strong>customers</strong></td><td>id</td><td>INT</td><td>PK, AUTO_INCREMENT</td><td>Unique customer ID</td></tr>
+            <tr><td>full_name</td><td>VARCHAR(100)</td><td>NOT NULL</td><td>Owner legal name</td></tr>
+            <tr><td>email / phone</td><td>VARCHAR</td><td>NOT NULL</td><td>Contact credentials</td></tr>
+            <tr><td rowspan="3"><strong>pets</strong></td><td>id</td><td>INT</td><td>PK, AUTO_INCREMENT</td><td>Unique pet identifier</td></tr>
+            <tr><td>customer_id</td><td>INT</td><td>FK -> customers(id)</td><td>Associated owner reference</td></tr>
+            <tr><td>species / breed</td><td>VARCHAR</td><td>NOT NULL</td><td>Animal classification</td></tr>
+            <tr><td rowspan="3"><strong>appointments</strong></td><td>id / code</td><td>INT / VARCHAR</td><td>PK / UNIQUE</td><td>Unique booking code</td></tr>
+            <tr><td>customer_id / pet_id</td><td>INT</td><td>FK -> customers / pets</td><td>Relational links</td></tr>
+            <tr><td>vet_doctor / date / time</td><td>VARCHAR / DATE</td><td>NOT NULL</td><td>Schedule attributes</td></tr>
+            <tr><td rowspan="3"><strong>treatments</strong></td><td>id</td><td>INT</td><td>PK, AUTO_INCREMENT</td><td>Unique treatment invoice</td></tr>
+            <tr><td>appointment_id</td><td>INT</td><td>FK -> appointments(id), UNIQUE</td><td>Linked appointment</td></tr>
+            <tr><td>medication_cost / treatment_cost / total_amount</td><td>DECIMAL(10,2)</td><td>NOT NULL</td><td>Financial audit billing</td></tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 5 -->
+    <h1>CHAPTER 5: USER INTERFACE IMPLEMENTATION & TRANSACTIONS</h1>
+    <h2>5.1 Overview of Implemented Interfaces (6 Screens)</h2>
+    <ol>
+        <li><strong>Login Screen (<code>LoginFrame</code>):</strong> Secure authentication with role redirection.</li>
+        <li><strong>Clinic Dashboard (<code>DashboardPanel</code>):</strong> Five KPI summary cards and active appointment schedule table.</li>
+        <li><strong>Pet Owner Management (<code>CustomerManagementPanel</code>):</strong> Full CRUD customer profile management.</li>
+        <li><strong>Patient Pet Directory (<code>PetManagementPanel</code>):</strong> Complete animal registration and medical records.</li>
+        <li><strong>Appointment Booking (<code>AppointmentManagementPanel</code> - Transaction 1):</strong> Cascading combo booking with doctor collision validation.</li>
+        <li><strong>Treatment & Billing (<code>TreatmentBillingPanel</code> - Transaction 2):</strong> Clinical procedure recording and live calculation billing.</li>
+    </ol>
+
+    <h2>5.2 Transaction 1: Appointment Scheduling with Conflict Detection</h2>
+    <p>When booking an appointment, the system executes two levels of data integrity enforcement:</p>
+    <ul>
+        <li><strong>Cascading Dropdown Selection:</strong> Selecting an owner dynamically filters the pet dropdown to show only pets belonging to that customer.</li>
+        <li><strong>Doctor Schedule Collision Prevention:</strong> The system verifies if the selected veterinarian is already booked for that date and time slot:</li>
+    </ul>
+    <pre><code>if (appointmentDAO.isDoctorDoubleBooked(doctor, date, time)) {
+    throw new InvalidAppointmentException(
+        "Dr. " + doctor + " already has an appointment scheduled on " + date + " at " + time + "."
+    );
+}</code></pre>
+
+    <h2>5.3 Transaction 2: Clinical Treatment & Dynamic Live Billing</h2>
+    <p>Doctors record clinical findings, procedures, and prescribed medications for appointments. The interface attaches live listeners to fee fields, recalculating total amounts instantly:</p>
+    <pre><code>KeyAdapter calcListener = new KeyAdapter() {
+    @Override
+    public void keyReleased(KeyEvent e) {
+        calculateTotalLive(); // Total Bill = Medication Fee + Procedure Fee
+    }
+};
+txtMedCost.addKeyListener(calcListener);
+txtTreatCost.addKeyListener(calcListener);</code></pre>
+    <p>Upon submission, the treatment record is created, invoice status is recorded, and the appointment status is updated to <em>Completed</em>.</p>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 6 -->
+    <h1>CHAPTER 6: JASPERREPORTS ENTERPRISE REPORTING</h1>
+    <h2>6.1 Multi-Table SQL Join Requirement</h2>
+    <p>The coursework specification requires at least one Jasper Report utilizing joins from <strong>more than two tables</strong>. The system exceeds this requirement by joining <strong>four relational tables</strong>:</p>
+    <pre><code>SELECT 
+    a.appointment_code, 
+    a.appointment_date, 
+    c.full_name AS customer_name, 
+    c.phone AS customer_phone, 
+    p.name AS pet_name, 
+    p.species, 
+    p.breed, 
+    a.vet_doctor, 
+    t.diagnosis, 
+    t.procedure_details, 
+    t.medication_cost, 
+    t.treatment_cost, 
+    t.total_amount, 
+    t.status AS payment_status
+FROM appointments a
+JOIN customers c ON a.customer_id = c.id
+JOIN pets p ON a.pet_id = p.id
+JOIN treatments t ON t.appointment_id = a.id
+ORDER BY a.appointment_date DESC;</code></pre>
+
+    <h2>6.2 Report Architecture & Export Features</h2>
+    <ul>
+        <li><strong>Template Design:</strong> Authored in <code>VeterinaryServiceReport.jrxml</code> with landscape layout, clinic branding banner, column headers, and itemized records.</li>
+        <li><strong>Automatic Revenue Aggregation:</strong> Computes the total sum of filtered revenue in the Summary band using JasperReports calculation variables (<code>$V{TOTAL_REVENUE}</code>).</li>
+        <li><strong>Multi-Format Output:</strong> Generates interactive Swing report preview (<code>JasperViewer</code>), direct PDF export (<code>JasperExportManager</code>), and CSV data export.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 7 & 8 -->
+    <h1>CHAPTER 7: INPUT VALIDATION & SYSTEM SECURITY</h1>
+    <p>Robust validation is implemented centrally in <code>ValidationHelper.java</code>:</p>
+    <ul>
+        <li><strong>Email Validation:</strong> Strict RFC-compliant regex pattern verifying domain and syntax.</li>
+        <li><strong>Phone Validation:</strong> Regex validating 7 to 15 numeric digits with optional country calling code prefix (<code>+</code>).</li>
+        <li><strong>Required Fields:</strong> Non-empty checks stripping whitespace to prevent blank submissions.</li>
+        <li><strong>Numeric Constraints:</strong> Enforces positive integers for age and non-negative decimal currency for fees.</li>
+    </ul>
+
+    <h1>CHAPTER 8: BUILD AUTOMATION, PACKAGING & DEPLOYMENT</h1>
+    <h2>8.1 Executable Fat JAR (Maven Shade Plugin)</h2>
+    <p>The application packages all dependencies (MySQL JDBC connector, JasperReports, FlatLaf) into a single standalone fat JAR:</p>
+    <pre><code>mvn clean package -DskipTests
+# Output: target/PetCare-1.0-SNAPSHOT.jar
+# Run: java -jar target/PetCare-1.0-SNAPSHOT.jar</code></pre>
+
+    <h2>8.2 Native Windows Executable (.exe) Packaging</h2>
+    <p>Using JDK 21 <code>jpackage</code>, the application compiles into a native Windows executable located at <code>dist/PetCare/PetCare.exe</code>, enabling deployment without requiring pre-installed Java runtimes on target client machines.</p>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 9 -->
+    <h1>CHAPTER 9: SOFTWARE VERIFICATION & TEST CASES</h1>
+    <table class="data-table">
+        <thead>
+            <tr><th>Test ID</th><th>Test Case Description</th><th>Input Data</th><th>Expected Result</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>TC-01</td><td>Manager Role Authentication</td><td>User: admin, Pass: admin123, Role: Manager</td><td>Login succeeds; all 6 tabs available</td><td>PASS</td></tr>
+            <tr><td>TC-02</td><td>Customer Role Access Restriction</td><td>User: john_doe, Pass: user123, Role: Customer</td><td>Login succeeds; admin tabs hidden</td><td>PASS</td></tr>
+            <tr><td>TC-03</td><td>Email Format Validation</td><td>Email: testuser@bademail</td><td>ValidationException; alert shown</td><td>PASS</td></tr>
+            <tr><td>TC-04</td><td>Phone Number Format Validation</td><td>Phone: 1234</td><td>ValidationException; alert shown</td><td>PASS</td></tr>
+            <tr><td>TC-05</td><td>Cascading Pet Dropdown</td><td>Selected Customer: John Doe</td><td>Dropdown lists only John Doe's pets</td><td>PASS</td></tr>
+            <tr><td>TC-06</td><td>Doctor Collision Detection</td><td>Same doctor, date, and timeslot</td><td>InvalidAppointmentException; booking rejected</td><td>PASS</td></tr>
+            <tr><td>TC-07</td><td>Dynamic Live Billing Calculation</td><td>Med: $45.00, Proc: $75.00</td><td>Total bill dynamically reflects $120.00</td><td>PASS</td></tr>
+            <tr><td>TC-08</td><td>Jasper Report Multi-Table Generation</td><td>Click "View Jasper Report"</td><td>JasperViewer opens showing 4-table joined data</td><td>PASS</td></tr>
+            <tr><td>TC-09</td><td>PDF Export Verification</td><td>Click "Export PDF"</td><td>Valid PDF report generated on disk</td><td>PASS</td></tr>
+            <tr><td>TC-10</td><td>Customer Record Deletion</td><td>Select customer with no active appts</td><td>Customer record deleted with confirmation</td><td>PASS</td></tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 10 -->
+    <h1>CHAPTER 10: CONCLUSION & VIVA VOCE PREPARATION GUIDE</h1>
+    <h2>10.1 Coursework Rubric Compliance</h2>
+    <table class="data-table">
+        <thead>
+            <tr><th>Coursework Requirement</th><th>Implementation Evidence</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Java Swing Enterprise Application</td><td>Desktop application with FlatLaf modern UI</td><td>100% Satisfied</td></tr>
+            <tr><td>Pet Care & Veterinary Services Domain</td><td>Complete animal healthcare management</td><td>100% Satisfied</td></tr>
+            <tr><td>At least 2 User Roles</td><td>Manager and Customer roles with RBAC</td><td>100% Satisfied</td></tr>
+            <tr><td>At least 5 Interfaces (excl. Login)</td><td>6 distinct screens (Dashboard, Owners, Pets, Appts, Treatments, Reports)</td><td>100% Satisfied</td></tr>
+            <tr><td>At least 2 Transaction UIs</td><td>Tx 1 (Appt Booking) & Tx 2 (Treatment & Live Billing)</td><td>100% Satisfied</td></tr>
+            <tr><td>Input Forms with Validation</td><td>Regex email/phone and numeric validation</td><td>100% Satisfied</td></tr>
+            <tr><td>MySQL CRUD Operations</td><td>Full CRUD operations backed by MySQL</td><td>100% Satisfied</td></tr>
+            <tr><td>MVC & Design Patterns</td><td>MVC architecture, Singleton pattern, DAO pattern</td><td>100% Satisfied</td></tr>
+            <tr><td>Jasper Report (> 2 Tables Joined)</td><td>Relational JOIN across 4 tables</td><td>100% Satisfied</td></tr>
+            <tr><td>Executable JAR and EXE Deployment</td><td>Automated Maven Shade JAR and jpackage Windows EXE</td><td>100% Satisfied</td></tr>
+        </tbody>
+    </table>
+
+    <h2>10.2 Top Anticipated Viva Voce Questions & Answers</h2>
+    
+    <div class="qa-box">
+        <div class="qa-question">Q1: Explain the architecture of your application.</div>
+        <div class="qa-answer">"Our system follows the Model-View-Controller (MVC) and Layered Architecture pattern. The View layer (<code>com.petcare.view</code>) manages Swing UI components; the Service layer (<code>com.petcare.service</code>) coordinates business rules, calculations, and validations; the DAO layer (<code>com.petcare.dao</code>) executes SQL operations; and the Model layer (<code>com.petcare.model</code>) defines domain entity objects."</div>
+    </div>
+
+    <div class="qa-box">
+        <div class="qa-question">Q2: Where and why did you implement the Singleton pattern?</div>
+        <div class="qa-answer">"We implemented the Singleton design pattern in <code>DatabaseConnection.java</code>. Instantiating database connections is computationally and network expensive. The Singleton pattern guarantees that a single, centralized connection instance is shared across all DAO operations, preventing socket exhaustion and connection leaks."</div>
+    </div>
+
+    <div class="qa-box">
+        <div class="qa-question">Q3: How does your Jasper Report satisfy the join requirements?</div>
+        <div class="qa-answer">"The coursework requires joining more than two tables. Our Jasper Report joins four tables: <code>appointments</code>, <code>customers</code>, <code>pets</code>, and <code>treatments</code>. This provides a complete audit trail from the pet owner down to individual clinical procedure charges and payment status."</div>
+    </div>
+
+    <div class="qa-box">
+        <div class="qa-question">Q4: What custom exception did you implement?</div>
+        <div class="qa-answer">"We created <code>InvalidAppointmentException.java</code>, a checked exception triggered when business logic rules are broken during appointment scheduling—such as attempting to book a past date or scheduling an appointment when the veterinarian is already double-booked."</div>
+    </div>
+
+    <div class="qa-box">
+        <div class="qa-question">Q5: How do you protect your database against SQL Injection?</div>
+        <div class="qa-answer">"All database queries across our Data Access Objects (DAOs) strictly use parametrized <code>PreparedStatement</code> objects. User input parameters are passed via indexed placeholders (<code>?</code>), preventing user data from altering SQL execution logic."</div>
+    </div>
+
+</div>
+
+</body>
+</html>
